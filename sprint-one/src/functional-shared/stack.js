@@ -30,3 +30,6 @@ var stackMethods = {
     return this.counter;
   }
 };
+
+var stack1 = Stack();
+stack1.push('hello');
