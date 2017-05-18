@@ -48,14 +48,6 @@ treeMethods.contains = function(target) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+    treeMethods.addChild: O(n^2)
+    treeMethods.contains: O(c^n)
  */
-/*
-else if (this.children.length > 0) {
-      for (let i = 0; i < this.children.length; i++) {
-        contains(this.children[i]);
-      }
-    } else {
-      return false;
-    }
-  }; 
-*/
