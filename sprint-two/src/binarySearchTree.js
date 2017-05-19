@@ -23,7 +23,7 @@ newTreeMethods.insert = function(value, node = this) {
       };
     }
   }
-  if (node.value < value) { // value goes left
+  if (node.value < value) { // value goes right
     if (Object.keys(node.right).length > 0) {
       this.insert(value, node.right);
     } else {  
@@ -37,23 +37,39 @@ newTreeMethods.insert = function(value, node = this) {
   }
 };
 
-newTreeMethods.contains = function() {
-
+newTreeMethods.contains = function(value, node = this) {
+  if (node.value > value) { // value goes left
+    if (Object.keys(node.left).length > 0) {
+      return this.contains(value, node.left);
+    } else {  
+      return false;
+    }
+  } else if (node.value < value) { // value goes right
+    if (Object.keys(node.right).length > 0) {
+      return this.contains(value, node.right);
+    } else {  
+      return false;
+    }
+  } else {
+    return true;
+  }
 };
 
-newTreeMethods.depthFirstLog = function() {
-
+// A .depthFirstLog() method, which accepts a callback and executes it on every value contained in the tree.
+newTreeMethods.depthFirstLog = function(cb, node = this) {
+  // alter top node
+  cb(node.value);
+  // check left to see if there is a left, and then alter it if it exists
+  if (Object.keys(node.left).length > 0) {
+    this.depthFirstLog(cb, node.left);
+  }
+  // check right to see if there is a right, and then alter it if it exists
+  if (Object.keys(node.right).length > 0) {
+    this.depthFirstLog(cb, node.right);
+  }
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
+  O(log n) for all functions because its a binary search
  */
-
-
-/*
-A .left property, a binary search tree (BST) where all values are lower than than it the current value.
-A .right property, a BST where all values are higher than than it the current value.
-A .insert() method, which accepts a value and places in the tree in the correct position.
-A .contains() method, which accepts a value and returns a boolean reflecting whether or not the value is contained in the tree.
-A .depthFirstLog() method, which accepts a callback and executes it on every value contained in the tree.
-*/
