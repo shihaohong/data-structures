@@ -7,17 +7,14 @@ var HashTable = function() {
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  // get LimitedArray index... var bucket = this._storage.get(index);
   var bucket = this._storage.get(index);
-  console.log(bucket);
+
   if (bucket === undefined) {
     this._storage.set(index, [[k, v]]);
   } else {
     var duplicateFound = false;
-    // what if there's a duplicate?
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === k) {
-        // this basically overwrites a discovered key's value with the new value
         bucket[i][1] = v;
         duplicateFound = true;
       }
@@ -68,6 +65,8 @@ HashTable.prototype.remove = function(k) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
- */
+ all functions have O(1) complexity
+
+*/
 
 
