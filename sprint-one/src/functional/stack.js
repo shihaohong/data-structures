@@ -27,3 +27,16 @@ var Stack = function() {
 
   return someInstance;
 };
+
+var stack = [];
+
+for (let i = 0; i < 50; i++) {
+  stack[i] = Stack();
+  stack[i].push(1);
+  stack[i].push(2);
+  stack[i].push(3);
+  stack[i].push(4);
+  stack[i].push(5);
+  stack[i].push(6);
+}
+
