@@ -16,6 +16,16 @@ describe('tree', function() {
     expect(tree.children[0].value).to.equal(5);
   });
 
+  it('should return null if there is no parent node', function () {
+    tree.addChild(5);
+    expect(tree.parent).to.equal(null);
+  });
+
+  it('should return parent node for a child node that contains the parent', function() {
+    tree.addChild(5);
+    expect(tree.children[0].parent).to.equal(tree);
+  });
+
   it('should return true for a value that the tree contains', function() {
     tree.addChild(5);
     expect(tree.contains(5)).to.equal(true);
@@ -39,6 +49,17 @@ describe('tree', function() {
     tree.children[1].addChild(8);
     expect(tree.contains(7)).to.equal(true);
     expect(tree.contains(8)).to.equal(true);
+  });
+
+  it('should be able to remove the parent of a child node from the tree if it exists', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    var childNode = tree.children[1];
+
+    tree.removeFromParent(6);
+    expect(tree.contains(6)).to.equal(false);
+    expect(tree.parent).to.equal(null);
+  
   });
 
 });
